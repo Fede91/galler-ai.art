@@ -7,7 +7,13 @@ import { Logo } from "../components/Logo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Card } from "../components/Card";
 import { RootLayout } from "../components/RootLayout";
-import { ChakraProvider, Heading, Text } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  Heading,
+  Stack,
+  Text,
+  useInterval,
+} from "@chakra-ui/react";
 import { PortfolioTitle } from "../components/PortfolioTitle";
 import { Footer } from "../components/Footer";
 import { Container } from "../components/Container";
@@ -49,6 +55,22 @@ const IndexPage: React.FC<Props> = ({ data }) => {
   const { hero, links } = staticData;
   console.log(data);
 
+  const [sliderIndex, setSliderIndex] = React.useState(0);
+  const [isPortfolioVisible, setIsPortfolioVisible] = React.useState(false);
+
+  const highlightedArt = React.useMemo(() => {
+    return data.allPrismicAiArt.edges.filter((art) => art.node.data.highlight);
+  }, [data]);
+
+  React.useEffect(() => {}, []);
+  useInterval(() => {
+    setSliderIndex((sliderIndex + 1) % highlightedArt.length);
+  }, 2800);
+
+  const handleTogglePortfolio = React.useCallback(() => {
+    setIsPortfolioVisible(!isPortfolioVisible);
+  }, [setIsPortfolioVisible, isPortfolioVisible]);
+
   return (
     <ChakraProvider theme={theme}>
       <RootLayout>
@@ -60,35 +82,54 @@ const IndexPage: React.FC<Props> = ({ data }) => {
           <Text fontSize="1.25rem">{hero.bio}</Text>
         </AboutContainer>
         <Container>
-          <PortfolioTitle />
-          <AutoplaySlider
-            play={true}
+          <PortfolioTitle onClick={handleTogglePortfolio} />
+          <AwesomeSlider
+            // play={true}
             bullets={false}
             organicArrows={false}
             fillParent
-            transitionDelay={500}
+            transitionDelay={800}
+            selected={sliderIndex}
           >
-            {data.allPrismicAiArt.edges
-              .filter((art) => art.node.data.highlight)
-              .map((art) => (
-                <div
-                  key={art.node.id}
-                  style={{
-                    height: "100vh",
-                    width: "100%",
-                    backgroundImage: `url("${art.node.data.preview.url}")`,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                  }}
-                >
-                  {/* <img
+            {highlightedArt.map((art) => (
+              <div
+                key={art.node.id}
+                style={{
+                  height: "100vh",
+                  width: "100%",
+                  backgroundImage: `url("${art.node.data.preview.url}")`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                }}
+              >
+                {/* <img
                   src={art.node.data.preview.url}
                   alt="Gatsby Docs are awesome"
                 /> */}
-                </div>
-              ))}
-          </AutoplaySlider>
+              </div>
+            ))}
+          </AwesomeSlider>
+          <Stack position={"absolute"} right="1rem" bottom={"1rem"} zIndex={25}>
+            {highlightedArt.map((art) => (
+              <div
+                key={art.node.id}
+                style={{
+                  height: "2rem",
+                  width: "2rem",
+                  backgroundImage: `url("${art.node.data.preview.url}")`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                }}
+              >
+                {/* <img
+              src={art.node.data.preview.url}
+              alt="Gatsby Docs are awesome"
+            /> */}
+              </div>
+            ))}
+          </Stack>
           <div
             style={{
               position: "absolute",
@@ -102,23 +143,36 @@ const IndexPage: React.FC<Props> = ({ data }) => {
               zIndex: 10,
             }}
           />
-          {/* <ResponsiveMasonry
-            columnsCountBreakPoints={{ 350: 1, 750: 1, 900: 2 }}
+          <Stack
+            position={"absolute"}
+            left={0}
+            top={0}
+            w={"100%"}
+            h={"100%"}
+            backgroundColor={"#000"}
+            zIndex={50}
+            marginTop={"0px !important"}
+            overflowY={"scroll"}
+            visibility={"hidden"}
           >
-            <Masonry>
-              {[...data.allDribbbleShot.nodes].map((shot) => (
-                <Card
-                  date={shot.published}
-                  title={shot.title}
-                  cover={shot.cover}
-                  localCover={shot.localCover}
-                  url={shot.url}
-                  tags={shot.tags}
-                  key={shot.id}
-                />
-              ))}
-            </Masonry>
-          </ResponsiveMasonry> */}
+            <ResponsiveMasonry
+              columnsCountBreakPoints={{ 350: 1, 750: 1, 900: 2 }}
+            >
+              <Masonry>
+                {[...data.allPrismicAiArt.edges].map((art) => (
+                  <Card
+                    date={""}
+                    title={art.node.data.title.text}
+                    cover={art.node.data.preview.url}
+                    localCover={""}
+                    url={""}
+                    tags={""}
+                    key={art.node.id}
+                  />
+                ))}
+              </Masonry>
+            </ResponsiveMasonry>
+          </Stack>
         </Container>
         {/* <Footer links={links} /> */}
       </RootLayout>

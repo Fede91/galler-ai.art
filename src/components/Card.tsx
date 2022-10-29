@@ -10,14 +10,12 @@ export const Card: React.FC<any> = ({
   localCover,
 }) => (
   <StyledContainer>
-    <a href={url} target="_blank" rel="noopener noreferrer">
-      <StyledImageWrapper>
-        <img src={cover} alt={title} />
-      </StyledImageWrapper>
-      <div>
-        <h4>{title}</h4>
-      </div>
-    </a>
+    <StyledImageWrapper>
+      <img src={cover} alt={title} />
+    </StyledImageWrapper>
+    <div>
+      <h4>{title}</h4>
+    </div>
   </StyledContainer>
 );
 
@@ -28,7 +26,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledImageWrapper = styled.div`
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   overflow: hidden;
   margin-bottom: 0.5rem;
 `;

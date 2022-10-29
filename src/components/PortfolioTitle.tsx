@@ -2,7 +2,11 @@ import { Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import styled from "styled-components";
 
-export const PortfolioTitle = () => {
+type Props = {
+  onClick: () => void;
+};
+
+export const PortfolioTitle: React.FC<Props> = ({ onClick }) => {
   const leftContainer = useBreakpointValue(
     {
       base: "0px",
@@ -36,7 +40,6 @@ export const PortfolioTitle = () => {
       alignContent="center"
       justifyContent={"center"}
       alignItems="center"
-      zIndex={-1}
     >
       <Stack
         position={"absolute"}
@@ -47,7 +50,7 @@ export const PortfolioTitle = () => {
         width={"1px"}
         opacity={0.15}
       />
-      <StyledWrapper>
+      <StyledWrapper onClick={onClick}>
         <Stack transform={"rotate(270deg)"}>
           <Text
             fontSize={"1rem"}
@@ -74,4 +77,5 @@ export const PortfolioTitle = () => {
 
 const StyledWrapper = styled.div`
   width: 25rem;
+  cursor: pointer;
 `;
