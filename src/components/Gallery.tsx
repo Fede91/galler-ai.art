@@ -3,7 +3,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useMediaQuery } from "@chakra-ui/react";
 import { Card } from "../components/Card";
 import { MasonryContainer } from "./MasonryContainer";
-import { TopShadow } from "./TopShadow copy";
+import { TopShadow } from "./TopShadow";
 
 type Props = {
   images: any[];

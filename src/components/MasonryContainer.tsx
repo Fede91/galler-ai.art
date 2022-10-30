@@ -1,6 +1,5 @@
 import { Stack, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
-import styled from "styled-components";
 
 type Props = {
   isLargerThanMd: boolean;

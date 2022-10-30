@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  VStack,
-  Text,
-  HStack,
-  Stack,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Stack, useBreakpointValue } from "@chakra-ui/react";
 import PrimaryBkg from "../assets/img/Blob_Primary.png";
 
 type Props = {
