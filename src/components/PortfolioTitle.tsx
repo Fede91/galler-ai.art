@@ -11,7 +11,7 @@ export const PortfolioTitle: React.FC<Props> = ({ onClick }) => {
     {
       base: "0px",
       sm: "0px",
-      md: "38vw",
+      md: "30vw",
     },
     {
       fallback: "base",
@@ -45,7 +45,7 @@ export const PortfolioTitle: React.FC<Props> = ({ onClick }) => {
         position={"absolute"}
         borderLeft={"1px solid #fff"}
         height="100vh"
-        left={"2.5rem"}
+        left={"2.45rem"}
         top={topLine}
         width={"1px"}
         opacity={0.15}

@@ -1,3 +1,4 @@
+import { Heading } from "@chakra-ui/react";
 import React from "react";
 import styled from "styled-components";
 
@@ -14,7 +15,9 @@ export const Card: React.FC<any> = ({
       <img src={cover} alt={title} />
     </StyledImageWrapper>
     <div>
-      <h4>{title}</h4>
+      <Heading as="h5" size="sm" color={"#fff"} opacity={0.5}>
+        {title}
+      </Heading>
     </div>
   </StyledContainer>
 );

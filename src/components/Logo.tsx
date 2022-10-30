@@ -10,4 +10,5 @@ const StyledImg = styled.img`
   position: fixed;
   left: 25px;
   top: 18px;
+  z-index: 100;
 `;

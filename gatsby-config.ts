@@ -6,9 +6,9 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `FeDesign`,
-    description: "Hi! I'm FeDesign, a UX / UI Enthusiast",
-    siteUrl: `https://fedesign.space`,
+    title: `GallerAI`,
+    description: "Portfolio of images generated with AI by FeDesing",
+    siteUrl: `https://galler-ai.art`,
     image: `/images/fd_logo.png`,
   },
   graphqlTypegen: true,

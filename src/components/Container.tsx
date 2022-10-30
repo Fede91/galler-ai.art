@@ -13,38 +13,14 @@ export const Container: React.FC<any> = ({ children }) => {
     }
   );
 
-  const paddingLeft = useBreakpointValue(
-    {
-      base: "80px",
-      sm: "80px",
-      md: "0",
-    },
-    {
-      fallback: "base",
-    }
-  );
-
-  const paddingTop = useBreakpointValue(
-    {
-      base: "0px",
-      sm: "0px",
-      md: "5.625rem",
-    },
-    {
-      fallback: "base",
-    }
-  );
-
   return (
     <Stack
-      w={{ sm: "100vw", md: "55vw" }}
+      w={{ sm: "100%", md: "60vw" }}
       h={h}
       overflowY="scroll"
-      paddingTop={paddingTop}
-      paddingLeft={paddingLeft}
-      paddingBottom={"7rem"}
-      position={"relative"}
       overflow={"hidden"}
+      marginTop={"0 !important"}
+      position="relative"
     >
       {children}
     </Stack>
